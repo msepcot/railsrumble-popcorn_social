@@ -2,7 +2,7 @@
   <%= javascript_include_tag 'http://js.pusherapp.com/1.5/pusher.min.js' %>
   <script type="text/javascript">
     var pusher = new Pusher('<%= Pusher.key %>');
-    var channel = pusher.subscribe('<%= params[:id] %>');
+    var channel = pusher.subscribe('<%= "#{@video.permalink}-#{@screen.uuid}" %>');
     channel.bind('chatroom', function(message) {
       $('#messages').prepend('<div class="message"><p>' + message.text + '</p></div>');
     });
@@ -26,11 +26,11 @@
 </div>
 
 <div id="chatroom">
-  <%= form_for Message.new, :url => auditorium_messages_path(params[:id]), :remote => true do |f| %>
+  <%= form_for Message.new, :url => auditorium_messages_path(@video.permalink, :screen => @screen.uuid), :remote => true do |f| %>
     <%= f.text_field :text %>
     <%= f.submit %>
   <% end %>
   <div id="messages">
-    <%= render @messages %>
+    <%= render :partial => 'auditorium/message', :collection => @messages %>
   </div>
 </div>

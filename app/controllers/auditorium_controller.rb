@@ -1,21 +1,38 @@
 class AuditoriumController < ApplicationController
+  before_filter :user_management, :only => :show
+  before_filter :find_video, :only => [:show, :create]
+  before_filter :find_screen, :only => :show
+  before_filter :find_messages, :only => :show
+  
   def index
     @videos = Video.limit(10)
   end
   
   def show
-    # @video = OEmbed::Providers.get('http://www.hulu.com/watch/169366/black-sheep')
-    @video = Video.where(:permalink => params[:id]).first
-    @messages = []
+    unless @screen
+      @screens = @video.screens
+      render :list
+    end
+  end
+  
+  def create
+    screen = Screen.create :video_id => @video.id
+    redirect_to auditorium_screen_path(@video.permalink, :screen => screen.uuid)
+  end
+  
+private
+  def find_video
+    @video = Video.where(:permalink => (params[:id] || params[:auditorium_id])).first
+    redirect_to auditorium_index_path unless @video
+  end
+  
+  def find_screen
+    return unless @video
+    @screen = @video.screens.where(:uuid => params[:screen]).first
+  end
+  
+  def find_messages
+    return unless @screen
+    @messages = @screen.messages.limit(10).order('id DESC')
   end
 end
-
-# attributes: 
-#   permalink: night-of-the-living-dead
-#   created_at: 2010-10-16 15:23:22.230714
-#   updated_at: 2010-10-16 15:23:22.230714
-#   ogg: http://www.archive.org/download/night_of_the_living_dead/night_of_the_living_dead.ogv
-#   id: 1
-#   mp4: http://www.archive.org/download/night_of_the_living_dead/night_of_the_living_dead_512kb.mp4
-#   height: 480
-#   width: 640

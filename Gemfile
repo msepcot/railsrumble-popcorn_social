@@ -39,6 +39,7 @@ gem 'newrelic_rpm'
 
 gem 'hpricot'
 gem 'imdb_party'
+gem 'uuidtools', :require => 'uuidtools'
 
 # Bundle gems for the local environment. Make sure to
 # put test-only gems in this group so their generators
