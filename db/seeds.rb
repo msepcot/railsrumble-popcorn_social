@@ -5,3 +5,11 @@
 #
 #   cities = City.create([{ :name => 'Chicago' }, { :name => 'Copenhagen' }])
 #   Mayor.create(:name => 'Daley', :city => cities.first)
+
+file = File.open "#{::Rails.root.to_s}/data/archive_movies_seed.json"
+archive_movies = JSON.parse file.read
+file.close
+
+archive_movies.each do |movie|
+  Video.create movie
+end

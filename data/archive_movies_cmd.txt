@@ -1,0 +1,1 @@
+wget "http://www.archive.org/advancedsearch.php?q=collection:feature_films&fl[]=avg_rating&fl[]=collection&fl[]=description&fl[]=format&fl[]=identifier&fl[]=licenseurl&fl[]=subject&fl[]=title&sort[]=downloads+desc&sort[]=avg_rating+desc&sort[]=&rows=5000&page=1&output=json" -O archive_movies.json 

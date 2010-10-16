@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101016142502) do
+ActiveRecord::Schema.define(:version => 20101016183320) do
 
   create_table "messages", :force => true do |t|
     t.integer  "user_id"
@@ -34,16 +34,8 @@ ActiveRecord::Schema.define(:version => 20101016142502) do
     t.datetime "updated_at"
   end
 
-  create_table "videos", :force => true do |t|
-    t.string   "title"
-    t.string   "permalink"
-    t.string   "mp4"
-    t.string   "ogg"
-    t.integer  "width"
-    t.integer  "height"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
+# Could not dump table "videos" because of following StandardError
+#   Unknown type 'bool' for column 'featured'
 
   create_table "viewings", :force => true do |t|
     t.integer  "user_id"
