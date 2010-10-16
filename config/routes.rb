@@ -31,6 +31,10 @@ MovieNight::Application.routes.draw do
   #     resource :seller
   #   end
 
+  resources :auditorium do
+    resources :messages
+  end
+
   # Sample resource route with more complex sub-resources
   #   resources :products do
   #     resources :comments

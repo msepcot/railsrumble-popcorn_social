@@ -1,2 +1,4 @@
 body { background: url(/images/background.jpg) top center no-repeat #000; }
-#video { width: 640px; margin: 7em auto; text-align: center; }
+#container { width: 856px; margin: 0 auto; position: relative; }
+#video { width: 640px; margin: 7em auto 2em; }
+#chatroom { width: 856px; height: 478px; background: url(/images/content.jpg) no-repeat 0 0; overflow: hidden; margin: 0 auto; padding: 1em 2em; }
