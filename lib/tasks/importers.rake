@@ -62,8 +62,8 @@ namespace :importers do
               :title => movie["title"],
               :mp4 => "#{download_base}/#{identifier}/#{mp4s.first}",
               :ogg => "#{download_base}/#{identifier}/#{oggs.first}",
-              :permalink => movie["identifier"],
-              :thumbnail => thumbnail,
+              :permalink => movie["title"].parameterize,
+              :thumbnail => "#{download_base}/#{identifier}/#{thumbnail}",
               :external_rating => movie["avg_rating"] ? (movie["avg_rating"].to_f * 20).to_i : nil,
               :description =>  movie["description"]
             } 
@@ -78,4 +78,12 @@ namespace :importers do
   end
   # end
 
+  desc "Amusing facts from imdb.  This relies on the vidoes being in the db."
+  task :archive_org_movies => :environment do
+    #require 'open-uri' 
+
+    Videos.all.each do |movie|
+      # 
+    end
+  end
 end

@@ -13,3 +13,4 @@ file.close
 archive_movies.each do |movie|
   Video.create movie
 end
+Video.all.each {|v| v.update_attributes :width => 640, :height => 480 }
