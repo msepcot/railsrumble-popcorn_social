@@ -4,4 +4,4 @@ log/*.log
 tmp/**/*
 Gemfile.lock
 config/pusher.yml
-
+help

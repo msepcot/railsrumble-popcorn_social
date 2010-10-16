@@ -1,3 +1,1 @@
-<p style="text-align: center; padding-top: 4em;">
-  <%= link_to 'Night of the Living Dead', auditorium_url(:id => 'night-of-the-living-dead') %>
-</p>
+<%= render :partial => 'video', :collection => @videos %>
