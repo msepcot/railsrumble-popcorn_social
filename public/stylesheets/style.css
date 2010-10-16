@@ -1,2 +1,2 @@
 body { background: url(/images/background.jpg) top center no-repeat #000; }
-#video { margin-top: 7em; text-align: center; }
+#video { width: 640px; margin: 7em auto; text-align: center; }
