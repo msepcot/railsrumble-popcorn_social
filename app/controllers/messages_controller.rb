@@ -5,5 +5,6 @@ class MessagesController < ApplicationController
   
   def create
     Pusher[params[:auditorium_id]].trigger('chatroom', { :text => params[:message][:text] })
+    render :nothing => true
   end
 end
