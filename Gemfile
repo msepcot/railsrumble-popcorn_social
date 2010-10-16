@@ -22,9 +22,13 @@ gem 'sqlite3-ruby', :require => 'sqlite3'
 # gem 'sqlite3-ruby', :require => 'sqlite3'
 # gem 'aws-s3', :require => 'aws/s3'
 
+# Ruby OEmbed
 gem 'json'
 gem 'xml-simple', '1.0.12'
 gem 'ruby-oembed', '0.7.6', :require => 'oembed'
+
+# Pusher
+gem 'pusher', :require => 'pusher'
 
 # Bundle gems for the local environment. Make sure to
 # put test-only gems in this group so their generators
