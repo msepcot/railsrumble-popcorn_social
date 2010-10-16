@@ -6,6 +6,10 @@
     channel.bind('chatroom', function(message) {
       $('#messages').prepend('<div class="message"><p>' + message.text + '</p></div>');
     });
+    jQuery(function($) {
+      var resetNewMessageForm = function() { $("#new_message")[0].reset() };
+      $("#new_message").bind("ajax:complete", resetNewMessageForm);
+    });
   </script>
   
   <%= javascript_include_tag '/video-js/video.js' %>
