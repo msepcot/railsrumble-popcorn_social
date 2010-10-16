@@ -5,7 +5,7 @@ set :use_sudo,      false
 set :deploy_via,    :remote_cache
 set :deploy_to,     "/data/web/#{application}"
 set :scm,           "git"
-set :user,          "root"
+set :user,          "grumbler"
 
 role :app, rumble_server
 role :web, rumble_server
