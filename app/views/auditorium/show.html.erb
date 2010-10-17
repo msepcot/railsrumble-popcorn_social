@@ -22,12 +22,16 @@
   
   <script type="text/javascript">
     var count = 0;
+    var notes = [];
     function showNote(text) {
-      $('#note').text(count).fadeIn().delay(3000).fadeOut();
-      count++;
+      $('#note').text(notes[count]).fadeIn().delay(3000).fadeOut();
+      count = (count + 1) % notes.length;
     }
     $(document).ready(function() {
-      setInterval("showNote();", 5000);
+      $.getJSON('<%= auditorium_json_messages_path(@video.permalink) %>', function(data) {
+        notes = data;
+        setInterval("showNote();", 5000);
+      });
     });
   </script>
 <% end %>
