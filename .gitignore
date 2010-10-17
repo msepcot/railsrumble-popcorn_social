@@ -5,4 +5,5 @@ log/*.log
 tmp/**/*
 Gemfile.lock
 config/pusher.yml
+config/twit.yml
 help

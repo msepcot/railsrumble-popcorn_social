@@ -43,8 +43,36 @@ namespace :configs do
   task :create_symlinks, :roles => :app do
     shared_dir = File.join(shared_path, 'config')
     run("cd #{current_release}/config && ln -s #{shared_dir}/pusher.yml")
+    run("cd #{current_release}/config && ln -s #{shared_dir}/twit.yml")
   end
 end
  
+namespace :talk do
+  task :update_twitter, :roles => :app do
+    messages = [
+      "I just pushed a build, what're you doin'?",
+      "Deployment time.  Why do I smell fire?",
+      "Just launched some bugs, shouldn't you help me find them?",
+      "Code push!",
+      "Don't kick the plug.  This last build is the one!",
+      "Just pushed some code, please help test",
+      "Come check out MovieTime we just updated!"
+    ]
+
+    begin
+      require 'twitter'
+      twit = YAML.load_file('config/twit.yml')
+      auth = Twitter::OAuth.new(twit['consumer_key'], twit['consumer_secret'])
+      auth.authorize_from_access(twit['access_token'], twit['access_secret'])
+      client = Twitter::Base.new(auth)
+      client.update messages.shuffle.first
+    rescue
+      # meh
+    end
+  end
+end
+
 after 'deploy:update_code', 'bundler:bundle_new_release'
 after 'deploy:update_code', 'configs:create_symlinks'
+
+after 'deploy', 'talk:update_twitter'
