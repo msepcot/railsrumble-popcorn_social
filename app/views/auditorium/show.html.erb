@@ -24,14 +24,22 @@
   <script type="text/javascript">
     var count = 0;
     var notes = [];
+    var position = [
+      [0,50], [50,50], [100,50], [150,50], [200,50], [250,50], [300,50], [350,50], 
+      [400,50], [450,50], [500,50], [550,50], [600,50], [0,100], [0,150], [0,200], 
+      [0,250], [0,300], [0,350], [0,400], [0,450], [600,100], [600,150], [600,200], 
+      [600,250], [600,300], [600,350], [600,400], [600,450]
+      ]
     function showNote(text) {
-      $('#note').text(notes[count]).fadeIn().delay(3000).fadeOut();
+      where = position[Math.floor(Math.random() * position.length)]
+      $('#note').text(notes[count]).css('left', where[0]).css('top', where[1]).fadeIn().delay(15000).fadeOut();
       count = (count + 1) % notes.length;
     }
     $(document).ready(function() {
       $.getJSON('<%= auditorium_json_messages_path(@video.permalink) %>', function(data) {
         notes = data;
-        setInterval("showNote();", 5000);
+        showNote();
+        setInterval("showNote();", 30000);
       });
     });
   </script>
