@@ -35,11 +35,7 @@
       count = (count + 1) % notes.length;
     }
     $(document).ready(function() {
-      $.getJSON('<%= auditorium_json_messages_path(@video.permalink) %>', function(data) {
-        notes = data;
-        showNote();
-        setInterval("showNote();", 30000);
-      });
+      $.getJSON('<%= auditorium_json_messages_path(@video.permalink) %>', function(data) { notes = data; });
     });
   </script>
 
@@ -50,6 +46,7 @@
     function play_video() {
       //alert("Playing");
       $("video")[0].play();
+      setInterval("showNote();", 30000);
     }
 
     $(document).ready(function() {
@@ -58,6 +55,8 @@
         //alert("Starts in: " + starts_in);
         if (starts_in>0) { 
           setTimeout("play_video();",parseFloat(starts_in) * 1000);
+        } else {
+          play_video();
         }
       });
     });
