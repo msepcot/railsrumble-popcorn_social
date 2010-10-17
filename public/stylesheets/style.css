@@ -1,15 +1,19 @@
 @import url("/stylesheets/DayPosterBlack-fontfacekit/stylesheet.css");
-body { background: url(/images/background.jpg) top center no-repeat #000; }
+body { background: url(/images/background.jpg) top center no-repeat #000; font-family: Arial, Helvetica, sans-serif; color: #e1d696; }
+a:link, a:visited, a:hover, a:active {color: #886a48;}
+p, h1, h2, h3, h4, h5, h6 {margin: 0 0 15px 0;}
 #container { width: 856px; margin: 0 auto; position: relative; padding-top: 4em; }
 #content { width: 640px; margin: 0 auto 2em; }
 #video { width: 640px; margin: 2em auto 2em; }
-#chatroom, #showtimes { width: 856px; height: 478px; background: url(/images/content.jpg) no-repeat 0 0; overflow: hidden; margin: 0 auto; padding: 1em 2em; }
-#search { width: 400px; text-align: center; margin: 0 auto 2em; }
+h1 {font-family: DayPosterBlackRegular, Arial, sans-serif; color: white; text-decoration: none;}
+#chatroom { width: 856px; height: 478px; background: url(/images/content.jpg) no-repeat 0 0; overflow: hidden; margin: 0 auto; padding: 1em 2em; }
+#search { width: 400px; text-align: center; margin: 0 auto 2em; color: #000;}
 #search_results { width: 660px; margin: 0 auto; }
 .search_term, .tagline { text-align: center; }
 .thumbnail { width: 180px; height: 150px; float: left; text-align: center; overflow: hidden; background: white; padding: 10px; margin: 10px; }
-h1, h2, .thumbnail a, .tagline { font-family: DayPosterBlackRegular, Arial, sans-serif; color: black; text-decoration: none; }
+.thumbnail a, .search_term, .tagline { font-family: DayPosterBlackRegular, Arial, sans-serif; color: black; text-decoration: none; }
+.tagline {margin-bottom: 50px;}
 a img { border: none; }
 img.poster { max-height: 200px; float: left; padding-right: 1em; }
-#description { color: #bbb; width: 640px; padding-top: 1em; }
-#screen_form { border: 1px solid #000; background: white; padding: 10px; margin: 10px; width: 756px; }
+#description { width: 440px; padding: 10px; float: left; }
+#showtimes {width: 200px; padding: 10px; margin-left: 460px;}
