@@ -9,9 +9,12 @@ class MessagesController < ApplicationController
   def create
     if current_user
       current_user.messages.create :text => params[:message][:text], :screen_id => @screen.id
+      unless current_user.display_name == params[:display_name] || params[:display_name].blank?
+        current_user.update_attribute(:display_name, params[:display_name])
+      end
     end
     Pusher["#{@video.permalink}-#{@screen.uuid}"].trigger(
-      'chatroom', { :text => params[:message][:text], :user => current_user.try(:display_name) }
+      'chatroom', { :text => params[:message][:text], :user => current_user.try(:display_name) || params[:display_name] }
     )
     render :nothing => true
   end

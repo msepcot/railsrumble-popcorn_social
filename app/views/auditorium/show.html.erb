@@ -7,7 +7,7 @@
       $('#messages').prepend('<div class="message"><p><span>' + message.user + ':&nbsp</span>' + message.text + '</p></div>');
     });
     jQuery(function($) {
-      var resetNewMessageForm = function() { $("#new_message")[0].reset() };
+      var resetNewMessageForm = function() { $("#message_text").val(''); };
       $("#new_message").bind("ajax:complete", resetNewMessageForm);
     });
   </script>
@@ -71,7 +71,8 @@
 
 <div id="chatroom">
   <%= form_for Message.new, :url => auditorium_messages_path(@video.permalink, :screen => @screen.uuid), :remote => true do |f| %>
-    <%= f.text_field :text %>
+    <%= text_field_tag :display_name, current_user.display_name %>
+    <%= f.text_field :text, :class => 'long' %>
     <%= f.submit %>
   <% end %>
   <div id="messages">
