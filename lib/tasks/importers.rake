@@ -7,7 +7,8 @@ namespace :importers do
     data = JSON.parse file.read
     file.close
     seed_data = [] # this is what we'll end up importing with seed.rb
-    
+    imdb = ImdbParty::Imdb.new # create an interface to imdb for later
+
     data["response"]["docs"].each do |movie|
       # "description" -> really long
       # "title":"Sex Madness",
@@ -55,18 +56,42 @@ namespace :importers do
 
           # only work with movies that have one file for the whole movie
           if mp4s.size == 1 and oggs.size == 1
-            puts "#{download_base}/#{identifier}/#{mp4s.first}"
-            puts "#{download_base}/#{identifier}/#{oggs.first}"
+            puts movie["title"]
 
-            seed_data << { 
+            seed = {
               :title => movie["title"],
               :mp4 => "#{download_base}/#{identifier}/#{mp4s.first}",
               :ogg => "#{download_base}/#{identifier}/#{oggs.first}",
               :permalink => movie["title"].parameterize,
               :thumbnail => "#{download_base}/#{identifier}/#{thumbnail}",
+              :description =>  movie["description"],
               :external_rating => movie["avg_rating"] ? (movie["avg_rating"].to_f * 20).to_i : nil,
-              :description =>  movie["description"]
-            } 
+            }
+             
+            almost_imdb_movie = imdb.find_by_title(movie["title"]).first
+            imdb_movie = nil 
+            if almost_imdb_movie
+              require 'pp'
+              pp  almost_imdb_movie[:imdb_id]
+              imdb_movie = imdb.find_movie_by_id(almost_imdb_movie[:imdb_id]) if almost_imdb_movie[:imdb_id]
+            end
+
+            unless imdb_movie.nil?
+              x = { 
+                :poster => imdb_movie.poster_url,
+                :tagline => imdb_movie.tagline,
+                :certification => imdb_movie.certification,  # supposed to be pg-13, etc. we'll see
+                :runtime => imdb_movie.runtime,
+                :released_on => Chronic.parse(imdb_movie.release_date), 
+                :imdb_rating => imdb_movie.rating ? (imdb_movie.rating.to_f * 10).to_i : nil,
+                :imdb_id => imdb_movie.imdb_id
+                # do something with genres.  need model for that.  FIXME
+              }
+
+              seed.merge! x
+            end 
+
+            seed_data << seed
           end
         end 
       end
@@ -79,10 +104,10 @@ namespace :importers do
   # end
 
   desc "Amusing facts from imdb.  This relies on the vidoes being in the db."
-  task :archive_org_movies => :environment do
+  task :imdb_facts => :environment do
     #require 'open-uri' 
 
-    Videos.all.each do |movie|
+    Video.all.each do |movie|
       # 
     end
   end

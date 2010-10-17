@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101016183320) do
+ActiveRecord::Schema.define(:version => 20101017000751) do
 
   create_table "messages", :force => true do |t|
     t.integer  "user_id"
@@ -47,6 +47,14 @@ ActiveRecord::Schema.define(:version => 20101016183320) do
     t.boolean  "featured"
     t.integer  "external_rating"
     t.text     "description"
+    t.string   "poster"
+    t.text     "tagline"
+    t.string   "certification"
+    t.string   "runtime"
+    t.time     "released_on"
+    t.integer  "imdb_rating"
+    t.string   "imdb_id"
+    t.boolean  "deleted"
   end
 
   create_table "viewings", :force => true do |t|
