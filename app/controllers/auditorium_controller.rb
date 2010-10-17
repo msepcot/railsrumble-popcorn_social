@@ -1,7 +1,7 @@
 class AuditoriumController < ApplicationController
   before_filter :user_management, :only => :show
-  before_filter :find_video, :only => [:show, :create]
-  before_filter :find_screen, :only => :show
+  before_filter :find_video, :only => [:show, :create, :starts_in]
+  before_filter :find_screen, :only => [:show, :starts_in]
   before_filter :find_messages, :only => :show
   
   def index
@@ -25,6 +25,17 @@ class AuditoriumController < ApplicationController
   def create
     screen = Screen.create :video_id => @video.id
     redirect_to auditorium_screen_path(@video.permalink, :screen => screen.uuid)
+  end
+
+  def starts_in
+    if @screen
+      # This has to be done by the server in case the clocks are different
+      # on the client
+      starts_in = Time.now + 2.minutes
+      render :json => { :starts_in => (starts_in - Time.now) }
+    else
+      render(:status => 404, :nothing => true)
+    end
   end
   
 private
