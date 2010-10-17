@@ -56,7 +56,7 @@ namespace :talk do
       "Code push!",
       "Don't kick the plug.  This last build is the one!",
       "Just pushed some code, please help test",
-      "Come check out MovieTime we just updated!"
+      "Come check out MovieNight we just updated!"
     ]
 
     begin
