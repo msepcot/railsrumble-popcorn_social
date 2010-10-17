@@ -4,8 +4,14 @@
   
   <div id="description">
     <%= image_tag @video.poster_path, :alt => @video.title, :class => 'poster' if @video.poster %>
-    <%= @video.description.html_safe %>
+    <p><%= @video.description.html_safe %></p>
   </div><br clear="all" />
 </div>
 
 <%= render :partial => 'showtimes' %>
+
+<script>
+$(function() {
+  $('#description').truncate({max_length: 500});
+});
+</script>
