@@ -11,13 +11,31 @@ role :app, rumble_server
 role :web, rumble_server
 role :db,  rumble_server, :primary => true
 
+namespace :solr do
+  desc "Start solr"
+  task :start, :roles => :app do
+    run "cd #{current_release} && RAILS_ENV=production rake sunspot:solr:start"
+  end
+
+  desc "Stop solr"
+  task :stop, :roles => :app do
+    run "cd #{current_release} && RAILS_ENV=production rake sunspot:solr:stop"
+  end
+
+  desc "Index solr"
+  task :reindex, :roles => :app do
+    run "cd #{current_release} && RAILS_ENV=production rake sunspot:solr:reindex"
+  end
+end
+
+
 namespace :deploy do
   task :start, :roles => :app do
     run "touch #{current_release}/tmp/restart.txt"
   end
 
   task :stop, :roles => :app do
-    # Do nothing.
+    # nada
   end
 
   desc "Restart Application"
