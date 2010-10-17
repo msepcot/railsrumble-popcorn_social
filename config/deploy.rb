@@ -62,6 +62,7 @@ namespace :configs do
     shared_dir = File.join(shared_path, 'config')
     run("cd #{current_release}/config && ln -s #{shared_dir}/pusher.yml")
     run("cd #{current_release}/config && ln -s #{shared_dir}/twit.yml")
+    run("cd #{current_release}/public/images && ln -s #{shared_path}/images/poster poster")
   end
 end
  
