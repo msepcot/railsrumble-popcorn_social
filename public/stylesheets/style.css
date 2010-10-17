@@ -1,9 +1,9 @@
 @import url("/stylesheets/DayPosterBlack-fontfacekit/stylesheet.css");
 body { background: url(/images/background.jpg) top center no-repeat #000; }
 #container { width: 856px; margin: 0 auto; position: relative; padding-top: 4em; }
-#content { width: 640px; margin: 0 auto; }
+#content { width: 640px; margin: 0 auto 2em; }
 #video { width: 640px; margin: 2em auto 2em; }
-#chatroom { width: 856px; height: 478px; background: url(/images/content.jpg) no-repeat 0 0; overflow: hidden; margin: 0 auto; padding: 1em 2em; }
+#chatroom, #showtimes { width: 856px; height: 478px; background: url(/images/content.jpg) no-repeat 0 0; overflow: hidden; margin: 0 auto; padding: 1em 2em; }
 #search { width: 400px; text-align: center; margin: 0 auto 2em; }
 #search_results { width: 660px; margin: 0 auto; }
 .search_term, .tagline { text-align: center; }
