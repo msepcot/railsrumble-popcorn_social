@@ -37,6 +37,7 @@ gem 'pusher', :require => 'pusher'
 # New Relic
 gem 'newrelic_rpm'
 
+gem 'chronic'
 gem 'hpricot'
 gem 'imdb_party'
 
