@@ -83,7 +83,7 @@ namespace :talk do
       auth = Twitter::OAuth.new(twit['consumer_key'], twit['consumer_secret'])
       auth.authorize_from_access(twit['access_token'], twit['access_secret'])
       client = Twitter::Base.new(auth)
-      client.update messages.shuffle.first
+      client.update "#{messages.shuffle.first} http://bit.ly/cXEDZj #railsrumble"
     rescue
       # meh
     end
