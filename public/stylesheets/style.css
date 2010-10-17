@@ -5,7 +5,11 @@ p, h1, h2, h3, h4, h5, h6 {margin: 0 0 15px 0;}
 #container { width: 856px; margin: 0 auto; position: relative; padding-top: 4em; }
 #content { width: 640px; margin: 0 auto 2em; }
 #video { width: 640px; margin: 2em auto 2em; }
-#chatroom { width: 856px; height: 478px; background: url(/images/content.jpg) no-repeat 0 0; overflow: hidden; margin: 0 auto; padding: 1em 2em; }
+#chatroom { width: 856px; height: 478px; background: url(/images/content.jpg) no-repeat 0 0; overflow: hidden; margin: 0 auto; padding: 1em 2em; color: #000; }
+#messages { margin-top: 1em; width: 786px; height: 403px; overflow-y: auto;; }
+.message { border-top: 1px solid #ccc; border-bottom: 1px solid #ccc; background: rgba(153,153,153,.4); color: #333; }
+.message p { padding: .5em 1em; margin: 0; }
+.message span { font-family: DayPosterBlackRegular, Arial, sans-serif; }
 #search { width: 400px; text-align: center; margin: 0 auto 2em; color: #000; }
 #search_results { width: 660px; margin: 0 auto; }
 .search_term, .tagline { text-align: center; }
