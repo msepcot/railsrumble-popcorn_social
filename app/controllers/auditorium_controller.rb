@@ -9,6 +9,7 @@ class AuditoriumController < ApplicationController
   end
 
   def search
+    @term = params[:q]
     @search = Video.search do
       keywords(params[:q])
     end

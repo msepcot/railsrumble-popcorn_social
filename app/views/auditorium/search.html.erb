@@ -1,5 +1,6 @@
 <%= render :partial => 'search' %>
 
 <div id="search_results">
+  <h1 class="search_term"><%= @term %></h1>
   <%= render :partial => 'video', :collection => @search.results %>
 </div>
