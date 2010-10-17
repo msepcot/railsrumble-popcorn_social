@@ -46,7 +46,12 @@
     function play_video() {
       //alert("Playing");
       $("video")[0].play();
-      setInterval("showNote();", 30000);
+      setInterval("showNote();", 30000); 
+    }
+
+    function jump_in_video(seconds) {
+      $("video")[0].currentTime = seconds;
+      setTimeout("play_video();",10000);
     }
 
     $(document).ready(function() {
@@ -55,6 +60,10 @@
         //alert("Starts in: " + starts_in);
         if (starts_in>0) { 
           setTimeout("play_video();",parseFloat(starts_in) * 1000);
+        } else if (starts_in<0) {
+          offset = (0 - parseFloat(starts_in)) + 10;
+          //alert("Offset:" + offset);
+          jump_in_video(offset); 
         } else {
           play_video();
         }
