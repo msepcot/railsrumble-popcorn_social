@@ -3,7 +3,7 @@
   <p class="tagline"><%= @video.tagline %></p>
   
   <div id="description">
-    <%= image_tag @video.poster, :alt => @video.title, :class => 'poster' if @video.poster %>
+    <%= image_tag @video.poster_path, :alt => @video.title, :class => 'poster' if @video.poster %>
     <%= @video.description.html_safe %>
   </div><br clear="all" />
 </div>

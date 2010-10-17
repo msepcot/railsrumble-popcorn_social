@@ -16,4 +16,27 @@ namespace :misc do
       video.update_attribute :featured, true
     end
   end
+  
+  desc 'download posters'
+  task :posters => :environment do
+    require 'cgi'
+    require 'net/http'
+    require 'uri'
+    
+    count = Video.where('poster IS NOT NULL').count
+    puts "Downloading IMDB Posters"
+    Video.where('poster IS NOT NULL').each_with_index do |video, index|
+      print "\r#{index + 1}/#{count}"
+      STDOUT.flush
+      
+      location = URI.parse(video.poster)
+      headers = { "User-Agent" => 'Mozilla/5.0 (X11; U; Linux x86_64; en-US; rv:1.9.2) Gecko/20100130 Gentoo Firefox/3.6' }
+      response = Net::HTTP::start(location.host, location.port) do |connection|
+        connection.request_get("#{location.path}", headers)
+      end
+      raise response.inspect unless response.is_a?(Net::HTTPSuccess)
+      File.open("#{Rails.root}/public/images/poster/#{video.permalink}#{File.extname(video.poster)}", "wb+") { |cache| cache.write(response.body) }
+      sleep(2)
+    end
+  end
 end
