@@ -1,0 +1,16 @@
+<div id="showtimes">
+  <h2>Now Playing</h2>
+  <p>Join one of these showings already in progress:</p>
+  <ul>
+  <% for screen in @screens %>
+    <li><%= link_to screen.uuid, auditorium_screen_path(@video.permalink, :screen => screen.uuid) %></li>
+  <% end %>
+  <% if @screens.empty? %><li>No active showings</li><% end %>
+  </ul>
+  <p>Or, create your own showing:</p>
+  <%= form_for :screen, :url => auditorium_path(@video.permalink), :html => { :id => 'screen_form' } do |f| %>
+    <p><%= f.label :delay, 'Waiting on friends? Setup a delayed start:' %> <%= f.select :delay, Screen::DelayOptions %></p>
+    <p><%= f.check_box :private %> <%= f.label :private, "Make this a private showing (will not show up in the Now Playing list)" %></p>
+    <%= f.submit 'Create Showing' %>
+  <% end %>
+</div>

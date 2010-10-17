@@ -17,22 +17,23 @@ class AuditoriumController < ApplicationController
   
   def show
     unless @screen
-      @screens = @video.screens
+      @screens = @video.screens.public
       render :info
     end
   end
   
   def create
-    screen = Screen.create :video_id => @video.id
+    screen = Screen.create(
+      :video_id => @video.id, 
+      :private => params[:screen][:private], 
+      :start_time => (Time.now + params[:screen][:delay].to_i * 60)
+    )
     redirect_to auditorium_screen_path(@video.permalink, :screen => screen.uuid)
   end
 
   def starts_in
     if @screen
-      # This has to be done by the server in case the clocks are different
-      # on the client
-      starts_in = Time.now + 2.minutes
-      render :json => { :starts_in => (starts_in - Time.now) }
+      render :json => { :starts_in => (@screen.start_time - Time.now) }
     else
       render(:status => 404, :nothing => true)
     end
