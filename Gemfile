@@ -37,6 +37,9 @@ gem 'pusher', :require => 'pusher'
 # New Relic
 gem 'newrelic_rpm'
 
+# Exceptional like hoptoad
+gem 'exceptional'
+
 gem 'chronic'
 gem 'hpricot'
 gem 'imdb_party'
