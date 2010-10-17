@@ -18,7 +18,7 @@ class AuditoriumController < ApplicationController
   def show
     unless @screen
       @screens = @video.screens
-      render :list
+      render :info
     end
   end
   

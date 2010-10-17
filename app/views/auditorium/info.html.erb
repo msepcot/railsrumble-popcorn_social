@@ -1,0 +1,21 @@
+<div id="content">
+  <h1 class="search_term"><%= @video.title %></h1>
+  <p class="tagline"><%= @video.tagline %></p>
+  
+  <div id="description">
+    <%= image_tag @video.poster, :alt => @video.title, :class => 'poster' if @video.poster %>
+    <%= @video.description.html_safe %>
+  </div>
+  
+  <div id="showtimes">
+  <% unless @screens.empty? %>
+    <p>Now playing in rooms:</p>
+    <ul>
+    <% for screen in @screens %>
+      <li><%= link_to screen.uuid, auditorium_screen_path(@video.permalink, :screen => screen.uuid) %></li>
+    <% end %>
+    </ul>
+  <% end %>
+    <p><%= link_to 'Create a New Showing', auditorium_path(@video.permalink), :method => :post %>
+  </div>
+</div>
