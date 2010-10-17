@@ -2,9 +2,11 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
   
   def user_management
-    unless cookies[:movie_ticket] || user_agent_is_bot?
-      @current_user = User.create :display_name => 'guest'
+    unless ( cookies[:movie_ticket] and cookies[:display_name] ) || user_agent_is_bot?
+      nick = cookies['identify_as']
+      @current_user = User.create :display_name => ( nick || 'guest' )
       cookies[:movie_ticket] = { :value => @current_user.uuid, :expires => 2.weeks.from_now }
+      cookies[:display_name] = { :value => @current_user.display_name, :expires => 2.weeks.from_now }
     end
   end
   
