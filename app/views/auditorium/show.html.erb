@@ -43,6 +43,19 @@
       });
     });
   </script>
+
+  <script type="text/javascript">
+    var starts_in = 3600;
+    var starts_in_url = 'http://' + window.location.host + window.location.pathname + '/starts_in';
+
+    $(document).ready(function() {
+      $.getJSON(starts_in_url, function(data) {
+        starts_in = data.starts_in;
+      });
+      alert("Starts in: " + starts_in);
+    });
+  </script>
+
 <% end %>
 
 <div id="video">
