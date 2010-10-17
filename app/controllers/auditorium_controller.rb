@@ -17,16 +17,20 @@ class AuditoriumController < ApplicationController
   
   def show
     unless @screen
-      @screens = @video.screens.public.limit(10)
+      @screens = @video.screens.public.still_playing.limit(10)
       render :info
     end
   end
   
   def create
+    # screen will show up for duration, or 2hrs
+    duration = ( @video.runtime =~ /(\d+)/ and $1.to_i * 60 ) || 7200
+  
     screen = Screen.create(
       :video_id => @video.id, 
       :private => params[:screen][:private], 
-      :start_time => (Time.now + params[:screen][:delay].to_i * 60)
+      :start_time => (Time.now + params[:screen][:delay].to_i * 60),
+      :end_time => (Time.now + duration)
     )
     redirect_to auditorium_screen_path(@video.permalink, :screen => screen.uuid)
   end
