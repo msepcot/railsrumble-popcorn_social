@@ -29,7 +29,7 @@ class AuditoriumController < ApplicationController
     screen = Screen.create(
       :video_id => @video.id, 
       :private => params[:screen][:private], 
-      :start_time => (Time.now + params[:screen][:delay].to_i * 60),
+      :start_time => (Time.now + params[:screen][:delay].to_i * 60 + 10),
       :end_time => (Time.now + duration)
     )
     redirect_to auditorium_screen_path(@video.permalink, :screen => screen.uuid)
