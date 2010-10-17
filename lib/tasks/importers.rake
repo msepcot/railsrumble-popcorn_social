@@ -104,11 +104,124 @@ namespace :importers do
   # end
 
   desc "Amusing facts from imdb.  This relies on the vidoes being in the db."
-  task :imdb_facts => :environment do
-    #require 'open-uri' 
+  task :imdb_goofs => :environment do
+    require 'open-uri' 
+    result = {}
+    
+    Video.all.each do |movie|
+      trivia = []
+      puts "# #{movie.title}"
+      begin
+        doc = Hpricot( open("http://www.imdb.com/title/#{movie.imdb_id}/goofs") )
+      rescue
+        # blah blah blah
+      end
+
+      unless doc.nil?
+        goofs = (doc/'ul.trivia'/'li')
+        goofs.each do |t|
+          text = t.to_plain_text.gsub(/\n/,'')
+          puts text
+          trivia << text
+        end
+      end
+    
+      result["#{movie.imdb_id}"] = trivia 
+    end
+
+    outfile = File.open("#{::Rails.root.to_s}/data/imdb_goofs_seed.json",'w+')
+    outfile << result.to_json 
+    outfile.close
+  end
+
+  desc "Amusing facts from imdb.  This relies on the vidoes being in the db."
+  task :imdb_trivia => :environment do
+    require 'open-uri' 
+    result = {}
 
     Video.all.each do |movie|
-      # 
+
+      trivia = []
+      puts "# #{movie.title}"
+      begin
+        doc = Hpricot( open("http://www.imdb.com/title/#{movie.imdb_id}/trivia") )
+      rescue
+        # blah blah blah
+      end
+
+      unless doc.nil?
+        imdb_trivia = (doc/'div.sodatext')
+        imdb_trivia.each do |t|
+          text = t.to_plain_text.gsub(/\n/,'')
+          text =~ /^(.*)Link this trivia.*/
+          text = $1.strip
+          
+          trivia << text
+        end
+      end
+
+      trivia.each do |t|
+        # Turns out this isn't really necessary.  But want to save the code for now
+        # we need to replace links to name / title with real ones
+        #t.scan(/\[\/\w+\/\w+\/\]/) do |m|
+        #  if m =~ /name/
+        #     if cache[m]
+        #       pre_cache[m] = cache[m]
+        #     else
+        #       cleaned_m = m.gsub(/\[/,'').gsub(/\]/,'')
+        #       begin
+        #         name_doc = Hpricot( open( "http://www.imdb.com#{m.gsub(/[\[\]]/,'')}" ) )
+        #         if (name_doc/"h1.header").inner_html.gsub(/\n/,'') =~ /^([^<]+)/
+        #           pre_cache[m] = $1
+        #         end
+        #       rescue
+        #         # blah blah blah
+        #       end
+        #     end
+        #  elsif m =~ /title/
+        #     if cache[m]
+        #       pre_cache[m] = cache[m]
+        #     else
+        #       cleaned_m = m.gsub(/\[/,'').gsub(/\]/,'')
+        #       begin
+        #         title_doc = Hpricot( open( "http://www.imdb.com#{m.gsub(/[\[\]]/,'')}" ) )
+        #         if (title_doc/"h1.header").inner_html.gsub(/\n/,'') =~ /^([^<]+)/
+        #           pre_cache[m] = $1
+        #         end 
+        #       rescue
+        #         # blah blah blah
+        #       end
+        #     end
+        #  end 
+        #end
+        
+        #pre_cache.each_pair do |k,v|
+        #  puts t
+        #  puts k
+        #  puts v 
+        #
+        #  t.gsub!(k,v)
+        #
+        #  # update the master cache 
+        #  cache[k] = v unless cache[k]
+        #end
+        
+        matches = []
+        t.scan(/\[\/\w+\/\w+\/\]/) do |m|
+          matches << m
+        end
+        matches.each do |m|
+          t.gsub!(m,'')
+        end
+        t.gsub!(/\s([ ',.\)])/,'\1')
+      end 
+     
+      result[movie.imdb_id] = trivia unless trivia.empty?
     end
+
+    outfile = File.open("#{::Rails.root.to_s}/data/imdb_trivia_seed.json",'w+')
+    outfile << result.to_json 
+    outfile.close
   end
+
 end
