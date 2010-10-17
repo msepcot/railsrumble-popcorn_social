@@ -1,6 +1,10 @@
 class MessagesController < ApplicationController
   before_filter :find_video
-  before_filter :find_screen
+  before_filter :find_screen, :only => :create
+  
+  def index
+    render :json => @video ? @video.notes.map(&:text) : []
+  end
   
   def create
     if current_user

@@ -19,6 +19,17 @@
     // Add VideoJS to all video tags on the page when the DOM is ready
     VideoJS.setupAllWhenReady();
   </script>
+  
+  <script type="text/javascript">
+    var count = 0;
+    function showNote(text) {
+      $('#note').text(count).fadeIn().delay(3000).fadeOut();
+      count++;
+    }
+    $(document).ready(function() {
+      setInterval("showNote();", 5000);
+    });
+  </script>
 <% end %>
 
 <div id="video">
@@ -34,3 +45,5 @@
     <%= render :partial => 'auditorium/message', :collection => @messages %>
   </div>
 </div>
+
+<div id="note"></div>
