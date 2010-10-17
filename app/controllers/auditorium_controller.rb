@@ -7,6 +7,12 @@ class AuditoriumController < ApplicationController
   def index
     @videos = Video.where(:featured => true).order("imdb_rating + external_rating DESC").limit(8)
   end
+
+  def search
+    @search = Video.search do
+      keywords(params[:q])
+    end
+  end
   
   def show
     unless @screen

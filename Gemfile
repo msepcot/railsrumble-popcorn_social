@@ -22,7 +22,7 @@ end
 
 # Bundle the extra gems:
 # gem 'bj'
-# gem 'nokogiri'
+gem 'nokogiri'
 # gem 'sqlite3-ruby', :require => 'sqlite3'
 # gem 'aws-s3', :require => 'aws/s3'
 
@@ -46,6 +46,9 @@ gem 'imdb_party'
 gem 'uuidtools', :require => 'uuidtools'
 gem 'twitter' # cap ;)
 gem 'oauth'
+
+# Search!
+gem 'sunspot_rails', '1.2.rc4'
 
 # Bundle gems for the local environment. Make sure to
 # put test-only gems in this group so their generators

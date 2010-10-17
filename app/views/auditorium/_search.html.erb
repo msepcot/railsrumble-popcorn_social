@@ -1,0 +1,5 @@
+<%= form_tag(search_path, :method => "get") do %>
+  <%= label_tag(:q, "I want to see:") %> 
+  <%= text_field_tag(:q) %>
+  <%= submit_tag("GO") %>
+<% end %>
