@@ -75,4 +75,4 @@ end
 after 'deploy:update_code', 'bundler:bundle_new_release'
 after 'deploy:update_code', 'configs:create_symlinks'
 
-after 'deploy', 'talk:update_twitter'
+after 'deploy:restart', 'talk:update_twitter'
