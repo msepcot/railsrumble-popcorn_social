@@ -27,9 +27,9 @@ gem 'nokogiri'
 # gem 'aws-s3', :require => 'aws/s3'
 
 # Ruby OEmbed
-gem 'json'
-gem 'xml-simple', '1.0.12'
-gem 'ruby-oembed', '0.7.6', :require => 'oembed'
+# gem 'json'
+# gem 'xml-simple', '1.0.12'
+# gem 'ruby-oembed', '0.7.6', :require => 'oembed'
 
 # Pusher
 gem 'pusher', :require => 'pusher'
@@ -51,8 +51,8 @@ gem 'oauth'
 gem 'sunspot_rails', '1.2.rc4'
 
 # Upload!
-#gem 's3_swf_upload', :git => 'git://github.com/nathancolgate/s3-swf-upload-plugin'
-#gem 'aws-s3', :require => 'aws/s3'
+# gem 's3_swf_upload', :git => 'git://github.com/nathancolgate/s3-swf-upload-plugin'
+# gem 'aws-s3', :require => 'aws/s3'
 
 # Bundle gems for the local environment. Make sure to
 # put test-only gems in this group so their generators
