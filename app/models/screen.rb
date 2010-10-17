@@ -10,7 +10,7 @@ class Screen < ActiveRecord::Base
   
   DelayOptions = [['Start Immediately', 0], ['One Minute Delay', 1], ['Two Minute Delay', 2], ['Five Minute Delay', 5], ['Ten Minute Delay', 10]]
   
-  scope :public, where(:private => false)
+  scope :public, where(:private => false).order('start_time DESC')
   
 private
   def setup_uuid

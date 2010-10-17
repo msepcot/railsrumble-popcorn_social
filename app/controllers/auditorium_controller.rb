@@ -17,7 +17,7 @@ class AuditoriumController < ApplicationController
   
   def show
     unless @screen
-      @screens = @video.screens.public
+      @screens = @video.screens.public.limit(10)
       render :info
     end
   end

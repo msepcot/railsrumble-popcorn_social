@@ -30,4 +30,9 @@ module AuditoriumHelper
     
     content_tag(:div, video_js + no_support, :class => 'video-js-box')
   end
+  
+  def start_time_to_words(time)
+    diff = (time - Time.now)
+    "start#{diff < 0 ? 'ed' : 'ing in'} #{distance_of_time_in_words(diff)}#{' ago' if diff < 0}"
+  end
 end

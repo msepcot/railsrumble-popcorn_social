@@ -3,7 +3,10 @@
   <p>Join one of these showings already in progress:</p>
   <ul>
   <% for screen in @screens %>
-    <li><%= link_to screen.uuid, auditorium_screen_path(@video.permalink, :screen => screen.uuid) %></li>
+    <li>
+      <%= link_to "Room #{screen.uuid}", auditorium_screen_path(@video.permalink, :screen => screen.uuid) %> - 
+      <%= start_time_to_words screen.start_time %>
+    </li>
   <% end %>
   <% if @screens.empty? %><li>No active showings</li><% end %>
   </ul>
