@@ -1,6 +1,5 @@
-<div style="width: 400px; margin: auto;">
-  <%= render :partial => 'search' %>
-</div>
-<div style="width: 720px; margin: 6em auto;">
+<%= render :partial => 'search' %>
+
+<div id="search_results">
   <%= render :partial => 'video', :collection => @search.results %>
 </div>

@@ -5,7 +5,7 @@ class AuditoriumController < ApplicationController
   before_filter :find_messages, :only => :show
   
   def index
-    @videos = Video.where(:featured => true).order("imdb_rating + external_rating DESC").limit(8)
+    @videos = Video.where(:featured => true).order("imdb_rating + external_rating DESC").limit(9)
   end
 
   def search
