@@ -9,10 +9,10 @@
   
   <div id="showtimes">
   <% unless @screens.empty? %>
-    <p>Now playing in rooms:</p>
+    <p><%= @video.title %> is playing on:</p>
     <ul>
     <% for screen in @screens %>
-      <li><%= link_to screen.uuid, auditorium_screen_path(@video.permalink, :screen => screen.uuid) %></li>
+      <li><%= link_to 'Screen '+screen.uuid, auditorium_screen_path(@video.permalink, :screen => screen.uuid) %></li>
     <% end %>
     </ul>
   <% end %>
